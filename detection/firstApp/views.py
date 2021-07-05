@@ -9,6 +9,7 @@ import tensorflow as tf
 import json
 from tensorflow import Graph
 from tensorflow import Session
+from PIL import Image
 
 
 
@@ -55,9 +56,12 @@ def predictImage(request):
     if float(acc)<99.50:
         predictedLabel = labelInfo["2"]
 
+    # im = img.convert("RGB")
+    # im.save("abc.jpg")
+    # print(img.convert("RGB"))
+    print(filePathName)
     context={'filePathName':filePathName,'predictedLabel':predictedLabel[1], 'acc':str(acc)}
     # os.remove(testimage)
-    print(img)
-    print(filePathName)
+    
     return render(request,'index.html',context) 
     
