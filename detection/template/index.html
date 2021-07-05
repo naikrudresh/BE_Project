@@ -10,18 +10,16 @@
     <form method="post" enctype="multipart/form-data" action="predictImage">
   
  {% csrf_token %}
- <div class="col-md-4 col-sm-4"><label for="fname">Upload Image File Here:</label>  <input name="filePath" type="file"><br><br>
+ <div class="col-md-4 col-sm-4"><label for="fname">Upload Image File Here:</label>  
+    <input name="filePath" type="file"><br><br>
  <br>
 
  
  <input type="submit" value="Submit" ></div>
 
  <h2>The classification of the image is {{predictedLabel}}</h2>
-
- 
-
-
-
+ <img src={{filePathName}} alt='imagename' width="150" height="150">
+ <h2>The Accuracy is: {{acc}}</h2>
 </form>
 </div>
 <br>

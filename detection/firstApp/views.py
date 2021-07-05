@@ -51,14 +51,13 @@ def predictImage(request):
     import numpy as np
     predictedLabel=labelInfo[str(np.argmax(predi[0]))]
 
-    context={'filePathName':filePathName,'predictedLabel':predictedLabel[1]}
-    os.remove(testimage)
+    acc = "{:.2f}".format(np.max(predi[0])*100)
+    if float(acc)<99.50:
+        predictedLabel = labelInfo["2"]
+
+    context={'filePathName':filePathName,'predictedLabel':predictedLabel[1], 'acc':str(acc)}
+    # os.remove(testimage)
+    print(img)
+    print(filePathName)
     return render(request,'index.html',context) 
     
-
-# def viewDataBase(request):
-#     import os
-#     listOfImages=os.listdir('./media/')
-#     listOfImagesPath=['./media/'+i for i in listOfImages]
-#     context={'listOfImagesPath':listOfImagesPath}
-#     return render(request,'viewDB.html',context) 
