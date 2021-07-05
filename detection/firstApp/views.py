@@ -1,6 +1,6 @@
 from django.shortcuts import render
 # Create your views here.
-
+import os
 from django.core.files.storage import FileSystemStorage
 import tensorflow as tf
 from keras.models import load_model
@@ -34,10 +34,9 @@ def index(request):
 
 
 def predictImage(request):
-    print (request)
-    print (request.POST.dict())
+    
     fileObj=request.FILES['filePath']
-    fs=FileSystemStorage()
+    fs=FileSystemStorage()                                             
     filePathName=fs.save(fileObj.name,fileObj)
     filePathName=fs.url(filePathName)
     testimage='.'+filePathName
@@ -53,7 +52,9 @@ def predictImage(request):
     predictedLabel=labelInfo[str(np.argmax(predi[0]))]
 
     context={'filePathName':filePathName,'predictedLabel':predictedLabel[1]}
+    os.remove(testimage)
     return render(request,'index.html',context) 
+    
 
 # def viewDataBase(request):
 #     import os
