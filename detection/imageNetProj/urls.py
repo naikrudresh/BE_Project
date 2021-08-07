@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url('^$',views.index,name='homepage'),
     url('predictImage',views.predictImage,name='predictImage'),
-    
+    url('errors',views.predictImage,name='errors'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

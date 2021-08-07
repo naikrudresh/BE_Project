@@ -35,33 +35,34 @@ def index(request):
 
 
 def predictImage(request):
-    
-    fileObj=request.FILES['filePath']
-    fs=FileSystemStorage()                                             
-    filePathName=fs.save(fileObj.name,fileObj)
-    filePathName=fs.url(filePathName)
-    testimage='.'+filePathName
-    img = image.load_img(testimage, target_size=(img_height, img_width))
-    x = image.img_to_array(img)
-    x=x/255
-    x=x.reshape(1,img_height, img_width,3)
-    with model_graph.as_default():
-        with tf_session.as_default():
-            predi=model.predict(x)
+    try:
+        fileObj=request.FILES['filePath']
+        fs=FileSystemStorage()                                             
+        filePathName=fs.save(fileObj.name,fileObj)
+        filePathName=fs.url(filePathName)
+        testimage='.'+filePathName
+        img = image.load_img(testimage, target_size=(img_height, img_width))
+        x = image.img_to_array(img)
+        x=x/255
+        x=x.reshape(1,img_height, img_width,3)
+        with model_graph.as_default():
+            with tf_session.as_default():
+                predi=model.predict(x)
 
-    import numpy as np
-    predictedLabel=labelInfo[str(np.argmax(predi[0]))]
+        import numpy as np
+        predictedLabel=labelInfo[str(np.argmax(predi[0]))]
 
-    acc = "{:.2f}".format(np.max(predi[0])*100)
-    if float(acc)<99.50:
-        predictedLabel = labelInfo["2"]
+        acc = "{:.2f}".format(np.max(predi[0])*100)
+        if float(acc)<99.50:
+            predictedLabel = labelInfo["2"]
 
-    # im = img.convert("RGB")
-    # im.save("abc.jpg")
-    # print(img.convert("RGB"))
-    print(filePathName)
-    context={'filePathName':filePathName,'predictedLabel':predictedLabel[1], 'acc':str(acc)}
-    # os.remove(testimage)
-    
-    return render(request,'index.html',context) 
-    
+        # im = img.convert("RGB")
+        # im.save("abc.jpg")
+        # print(img.convert("RGB"))
+        print(filePathName)
+        context={'filePathName':filePathName,'predictedLabel':predictedLabel[1], 'acc':str(acc)}
+        # os.remove(testimage)
+        
+        return render(request,'index.html',context) 
+    except:
+        return render(request, 'errors.html')
