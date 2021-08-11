@@ -26,7 +26,7 @@ To run the application in android studio please do the following:
 
 1)  Install Android Studio v11.0.8 or older
 
-2)  Click on File -> Open Project -> Select the project file -> Shellfish Identification
+2)  Click on File -> Open Project -> Select the project file ->Android
 
 3)  Click on Tools -> AVD Manager -> Create Virtual Device -> Select Virtual Device -> Pixel -> Next -> Select System Image -> API 25 or Nougat -> Next -> Finish
 
