@@ -24,3 +24,13 @@ Hello! These are the instructions to run the django app.
 
 7) Run Manage file:
 	python manage.py runserver
+	
+	
+	
+	
+To run the application in android studio please do the following:
+
+1) Install Android Studio v11.0.8 or older 
+2) Click on File -> Open Project -> Select the project file
+3) Click on Tools -> AVD Manager -> Create Virtual Device -> Select Virtual Device -> Pixel -> Next -> Select System Image -> API 25 or Nougat -> Next -> Finish
+4) Click on Run -> Run App 
